@@ -1,0 +1,30 @@
+# Notes_Player_Dealer_Correlation
+# Author: Luke Vassallo
+# Date: Saturday, 1 August 2020
+
+# 1. Summary of findings
+
+1. Processing the player data was made a little easier by appending the month and day to the Roulette_Loss data file
+
+2. It was clear from observing the contents of the Roulette_Loss file that Mylie Schmidt was the rogue player as she was at the table whenever a loss occurred.  Losses were identified by grepping out negative dollar values from the win_loss data files.
+
+3. Moving to the Dealer Schedules, I made life a little easier by making a single CSV data file to work with, appending the month and date to the start of each line using sed.  This file is called Normalised_Dealer_Schedule
+
+4. With the dealer schedule data normalised and made complete with the date, I created a script called Dealer_Working_During_Losses.sh that accepts three arguments. 
+	a. The month and date <MMDD>
+	b. The hour of the day <HH>
+	c. Morning or Afternoon <AM | PM>
+  
+  This scipt returns the month, date, time, am|pm and the name of the roulette dealer working at the date/time specified as input
+
+5. Using the dates and times from the Roulette_Losses file in step 1 above, I created a second script which called Dealer_Working_During_Losses.sh for each of these times
+
+6. I sent the output of Dealer_Working_During_Losses.sh to the text file Dealers_working_during_losses
+
+7. It turns out that Billy Jones was the roulette dealer working at each of the 13 times a loss was taken by the casino.  
+
+8. Since Billy was the only dealer working the roulette table, determining the number of times he was working when losses occurred, was simply a matter of counting the lines in the Dealers_working_during_losses file using the command:
+
+  cat Dealers_working_during_losses | wc -l
+
+

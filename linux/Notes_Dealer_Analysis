@@ -1,0 +1,18 @@
+# Notes_Dealer_Analysis
+# Author: Luke Vassallo
+# Date: Saturday, 1 August 2020
+
+# Question 1: Who was the primary dealer working at the times when the losses occurred?
+1. Billy Jones was the dealer working at the roulette table when losses occurred
+
+# Billy was identified as the rogue dealer through the following steps:
+# 1. The three dealer sehedule data files were normalised into a single CSV file called Normalised_Dealer_Schedule to make data analysis easier
+# 2. I created a shell script called Dealer_Lookup.sh which takes the Month and Day <MMDD>, Hour <HH> and AM or PM <AM|PM> as parameters to find the name of the roulette dealer working at this day and time
+# 3. I created a second shell script called Dealer_Working_During_Losses.sh which called Dealer_Lookup.sh using each day and time from the Roulette_Losses file to reveal the roulette dealer(s) working during each of these times.  It turns out that Billy Jones was working the roulett table at each of these times.  The output of this script was sent to the file Dealers_working_during_losses.  
+
+# Question 2: How many times did the dealer work when major losses occurred?
+2. 13 times 
+
+# Because Billy Jones was the roulette dealer at each of the times a loss occurred, the answer to question #2 was simply a matter of using the command:
+# cat Dealers_working_during_losses | wc -l
+
