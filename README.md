@@ -160,7 +160,7 @@ The configuration details of each machine may be found below.
 | Web-1    | DVWA     | 10.0.0.4   | Linux            |
 | Web-2    | DVWA     | 10.0.0.5   | Linux            |
 | Web-3    | DVWA     | 10.0.0.6   | Linux            |
-| Elk-1    | ELK.     | 10.1.0.4   | Linux            |
+| Elk-1    | ELK      | 10.1.0.4   | Linux            |
 
 ### Access Policies
 
@@ -170,15 +170,17 @@ Only the Jump Box machine can accept SSH connections from the Internet. Access t
 - 120.154.110.138
 
 Machines within the network can only be accessed by the Jump Box.
-- The Jump Box can access the ELK VM Elk-1 with an SSH connection.  The Jump Box's IP address is 10.0.0.7
+- The Jump Box can access the ELK VM Elk-1 using SSH.  The Jump Box's IP address is 10.0.0.7
 
 A summary of the access policies in place can be found in the table below.
 
-| Name     | Publicly Accessible | Allowed IP Addresses |
-|----------|---------------------|----------------------|
-| Jump Box | Yes.                |   |
-|          |                     |                      |
-|          |                     |                      |
+| Name     | Publicly Accessible | Allowed IP Addresses | Allowed Ports |
+|----------|---------------------|----------------------|---------------|
+| Jump Box | Yes (SSH)           | 120.154.110.138      | 22            |
+| Web-1    | Yes (HTTP)          | 120.154.110.138      | 80            |
+| Web-2    | Yes (HTTP)          | 120.154.110.138      | 80            |
+| Web-3    | Yes (HTTP)          | 120.154.110.138      | 80            |
+| Elk-1    | Yes (HTTP)          | 120.154.110.138      | 5601          |
 
 ### Elk Configuration
 
