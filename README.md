@@ -184,7 +184,8 @@ A summary of the access policies in place can be found in the table below.
 
 ### Elk Configuration
 
-Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
+Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because:
+
 - Build and deployment is performed automatically, consistently and quickly
 - Consistent, rapid configuration and depoloyment of virtual machines ensure all prescribed security meaures can be scripted to minimise attack surfaces while enabling horizontal and elastic scaling by deployment to more or fewer virtual machines in a cluster as required to meet capacity demand.
 - Facilitates OS and software updates
@@ -219,32 +220,55 @@ filebeat-playbook.yml is used to deploy Filebeat on each of the web servers so t
 - Enables and congigures the system module
 - Configures and launches Filebeat
 
-
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
 ![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
-- _TODO: List the IP addresses of the machines you are monitoring_
+- Web-1: 10.0.0.4
+- Web-2: 10.0.0.5
+- Web-3: 10.0.0.6
 
 We have installed the following Beats on these machines:
-- _TODO: Specify which Beats you successfully installed_
+- Filebeat
+- Metricbeat
 
 These Beats allow us to collect the following information from each machine:
-- _TODO: In 1-2 sentences, explain what kind of data each beat collects, and provide 1 example of what you expect to see. E.g., `Winlogbeat` collects Windows logs, which we use to track user logon events, etc._
 
-### Using the Playbook
+- Filebeat collects and ships (sends to ELK for collation, persistence and reporting) logs from VMs running the Filebeat agent
+- Metricbeat collects and ships system metrics from the operating system and services of VMs running the Metricbeat
+
+### Using the Playbooks
 In order to use the playbook, you will need to have an Ansible control node already configured. Assuming you have such a control node provisioned: 
 
 SSH into the control node and follow the steps below:
-- Copy the _____ file to _____.
-- Update the _____ file to include...
-- Run the playbook, and navigate to ____ to check that the installation worked as expected.
+- Copy the playbook files to Ansible Docker Container.
+- Update the Ansible hosts file `/etc/ansible/hosts` to include the following: 
 
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_
-- _Which URL do you navigate to in order to check that the ELK server is running?
+```
+[webservers]
+10.0.0.4 ansible_python_interpreter=/usr/bin/python3
+10.0.0.5 ansible_python_interpreter=/usr/bin/python3
+10.0.0.6 ansible_python_interpreter=/usr/bin/python3
 
-_As a **Bonus**, provide the specific commands the user will need to run to download the playbook, update the files, etc._
+[elkservers]
+10.1.0.4 ansible_python_interpreter=/usr/bin/python3
+```
+
+- Update the Ansible configuration file `/etc/ansible/ansible.cfg` and set the remote_user parameter to the admin user of the web servers.
+
+#### Running the Playbooks
+1. Start an ssh session with the Jump Box `~$ ssh sysadmin@<Jump Box Public IP>`
+2. Start the Ansible Docker container `~$ sudo docker start <Ansible Container>`
+3. Attach a shell to the Ansible Docker container with the command `~$ sudo docker attach <Ansible Container>
+4. Run the playbooks with the following commands:
+	* `ansible-playbook /etc/ansible/pentest.yml`
+	* `ansible-playbook /etc/ansible/install-elk.yml`
+	* `ansible-playbook /etc/ansible/roles/filebeat-playbook.yml`
+
+- Note that the Playbook 2 - `install_elk.yml` configures only the server(s) listed as `[elkservers]` in `/etc/ansible/hosts`
+- Similarly Playbook 3 - `filebeat-playbook.yml` configures the servers listed as `[webservers]` in `/etc/ansible/hosts`
+
+- After running the playbooks and observing no errors in the output, navigate to Kibana to check that the installation worked as expected by viewing Filebeat and Metricbeat data and reports in the Kibana Dashboard
+- Kibana can be accessed at [http://\<elk-server-ip\>:5601/app/kibana]()
