@@ -185,12 +185,40 @@ A summary of the access policies in place can be found in the table below.
 ### Elk Configuration
 
 Ansible was used to automate configuration of the ELK machine. No configuration was performed manually, which is advantageous because...
-- _TODO: What is the main advantage of automating configuration with Ansible?_
+- Build and deployment is performed automatically, consistently and quickly
+- Consistent, rapid configuration and depoloyment of virtual machines ensure all prescribed security meaures can be scripted to minimise attack surfaces while enabling horizontal and elastic scaling by deployment to more or fewer virtual machines in a cluster as required to meet capacity demand.
+- Facilitates OS and software updates
 
-The playbook implements the following tasks:
-- _TODO: In 3-5 bullets, explain the steps of the ELK installation play. E.g., install Docker; download image; etc._
-- ...
-- ...
+### Playbooks
+
+The three playbooks above implement the following tasks:
+
+#### Playbook 1: pentest.yml
+pentest.yml is used to set up DMWA servers running in a Docker container on each of the web servies show in the diagram above.  It implements the following tasks:
+
+- Installs Docker
+- Installs Python
+- Installs Docker's Python Module
+- Downloads and launches the DVWA Docker container
+- Enables the Docker service
+
+#### Playbook 2: install-elk.yml
+install-elk.yml is used to set up and launch the ELK repository server in a Docker Container on the ELK server.  It implements the following tasks:
+
+- Installs Docker
+- Installs Python
+- Installs Docker's Python Module
+- Increase virtual memory to support the ELK stack
+- Increase memory to support the ELK stack
+- Download and launch the Docker ELK container
+
+#### Playbook 3: filebeat-playbook.yml
+filebeat-playbook.yml is used to deploy Filebeat on each of the web servers so they can be monitored centrally using ELK services running on Elk-1.  It implements the following tasks:
+
+- Downloads and installs Filebeat
+- Enables and congigures the system module
+- Configures and launches Filebeat
+
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
