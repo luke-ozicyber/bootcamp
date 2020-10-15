@@ -222,7 +222,7 @@ filebeat-playbook.yml is used to deploy Filebeat on each of the web servers so t
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![TODO: Update the path with the name of your screenshot of docker ps output](Images/docker_ps_output.png)
+![](https://github.com/luke-ozicyber/bootcamp/blob/main/diagrams/elk_docker_container.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
