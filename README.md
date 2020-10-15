@@ -261,7 +261,7 @@ SSH into the control node and follow the steps below:
 #### Running the Playbooks
 1. Start an ssh session with the Jump Box `~$ ssh sysadmin@<Jump Box Public IP>`
 2. Start the Ansible Docker container `~$ sudo docker start <Ansible Container>`
-3. Attach a shell to the Ansible Docker container with the command `~$ sudo docker attach <Ansible Container>
+3. Attach a shell to the Ansible Docker container with the command `~$ sudo docker attach <Ansible Container Name>`
 4. Run the playbooks with the following commands:
 	* `ansible-playbook /etc/ansible/pentest.yml`
 	* `ansible-playbook /etc/ansible/install-elk.yml`
