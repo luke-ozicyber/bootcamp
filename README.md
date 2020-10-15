@@ -2,8 +2,8 @@
 
 The files in this repository were used to configure the network depicted below.
 
-![![](https://github.com/luke-ozicyber/bootcamp/blob/main/diagrams/Azure%20Cloud%20Project%20-%20Week%2013%20Diagram.png)
-]()
+![](https://github.com/luke-ozicyber/bootcamp/blob/main/diagrams/Network-Diagram.png)
+
 These files have been tested and used to generate a live ELK deployment on Azure. They can be used to either recreate the entire deployment pictured above. Alternatively, select portions of the playbook file may be used to install only certain pieces of it, such as Filebeat.
 
 #### Playbook 1: pentest.yml
